@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import EventList from '../views/EventList.vue'
+import OrganizerList from '../views/OrganizerList.vue'
 import About from '../views/About.vue'
 import EventDetails from '@/views/event/Details.vue'
 import EventRegister from '@/views/event/Register.vue'
 import EventEdit from '@/views/event/Edit.vue'
 import AddEvent from '@/views/EventForm.vue'
+import AddOrganizer from '@/views/OrganizerForm.vue'
 import EventLayout from '@/views/event/Layout.vue'
 import NotFound from '@/views/NotFound.vue'
 import NetWorkError from '@/views/NetworkError.vue'
@@ -16,6 +18,12 @@ const routes = [
     path: '/',
     name: 'EventList',
     component: EventList,
+    props: (route) => ({ page: parseInt(route.query.page) || 1 })
+  },
+  {
+    path: '/',
+    name: 'OrganizerList',
+    component: OrganizerList,
     props: (route) => ({ page: parseInt(route.query.page) || 1 })
   },
   {
@@ -86,6 +94,11 @@ const routes = [
     path: '/add-event',
     name: 'AddEvent',
     component: AddEvent
+  },
+  {
+    path: '/add-organizer',
+    name: 'AddOrganizer',
+    component: AddOrganizer
   }
 ]
 

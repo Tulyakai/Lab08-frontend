@@ -1,68 +1,47 @@
 <template>
   <div>
-    <h1>Create an event</h1>
-    <form @submit.prevent="saveEvent">
-      <label>Category</label>
+    <h1>Create an organizer</h1>
+    <form @submit.prevent="saveOrganizer">
+      <label>Name</label>
       <input
-        v-model="event.category"
+        v-model="organizer.orgName"
         type="text"
-        placeholder="Category"
-        class="field"
-      />
-      <h3>Name & describe your event</h3>
-
-      <label>Title</label>
-      <input
-        v-model="event.title"
-        type="text"
-        placeholder="Title"
+        placeholder="Name"
         class="field"
       />
 
-      <label>Description</label>
+      <label>Address</label>
       <input
-        v-model="event.description"
+        v-model="organizer.address"
         type="text"
-        placeholder="Description"
+        placeholder="Address"
         class="field"
       />
-
-      <h3>Where is your event?</h3>
-
-      <label>Location</label>
-      <input
-        v-model="event.location"
-        type="text"
-        placeholder="Location"
-        class="field"
-      />
-
       <button type="submit">Submit</button>
     </form>
-    <pre>{{ event }}</pre>
+    <pre>{{ organizer }}</pre>
   </div>
 </template>
 <script>
-import EventService from '@/services/EventService.js'
+import OrganizerService from '@/services/OrganizerService.js'
+
 export default {
   inject: ['GStore'],
   data() {
     return {
-      event: {
-        category: '',
-        title: '',
-        description: '',
-        location: ''
+      organizer: {
+        orName: '',
+        address: ''
       }
     }
   },
   methods: {
-    saveEvent() {
-      EventService.saveEvent(this.event)
+    saveOrganizer() {
+      OrganizerService.saveOrg(this.organizer)
         .then((response) => {
           console.log(response)
           this.GStore.flashMessage =
-            'You are successfully add a new event for ' + response.data.title
+            'You are successfully add a new organizer for ' + response.data.orgName
           setTimeout(() => {
             // After 3 seconds remove it
             this.GStore.flashMessage = ''
